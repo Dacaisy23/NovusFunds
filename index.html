@@ -15,30 +15,36 @@
             --border-color: #1e293b;
             --success-color: #10b981;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
         body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; }
         
-        nav { background: var(--card-bg); border-bottom: 1px solid var(--border-color); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        /* Sticky Top Navigation Bar */
+        nav { background: var(--card-bg); border-bottom: 1px solid var(--border-color); padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
         .logo { font-size: 1.4rem; font-weight: 700; cursor: pointer; }
         .logo span { color: var(--primary-accent); }
         .nav-links { display: flex; gap: 1.5rem; list-style: none; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; cursor: pointer; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: color 0.2s; }
         .nav-links a:hover, .nav-links a.active { color: var(--primary-accent); }
 
+        /* Page Layout Configurations */
         .view { display: none; padding: 3rem 1rem; max-width: 1000px; width: 100%; margin: 0 auto; flex: 1; }
         .view.active { display: block; }
         
+        /* Welcoming Presentation View Elements */
         .hero { text-align: center; max-width: 750px; margin: 0 auto 3rem; }
         .hero h1 { font-size: 2.5rem; margin-bottom: 1.2rem; line-height: 1.2; }
         .hero h1 span { color: var(--primary-accent); }
         .hero p { color: var(--text-muted); margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.6; }
-        .btn { background: var(--primary-accent); color: #000; padding: 0.8rem 1.8rem; border-radius: 6px; font-weight: 600; text-decoration: none; cursor: pointer; border: none; display: inline-block; }
+        
+        .btn { background: var(--primary-accent); color: #000; padding: 0.8rem 1.8rem; border-radius: 6px; font-weight: 600; text-decoration: none; cursor: pointer; border: none; display: inline-block; transition: background 0.2s; }
         .btn:hover { background: var(--primary-hover); }
 
+        /* Percentage Analytics Metrics */
         .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
         .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 2rem; text-align: center; }
         .num { font-size: 2.5rem; font-weight: 700; color: var(--primary-accent); margin-bottom: 0.5rem; }
         
+        /* Processing Form Architecture */
         .form-group { margin-bottom: 1.25rem; text-align: left; }
         label { display: block; font-size: 0.85rem; margin-bottom: 0.4rem; color: var(--text-muted); }
         input, select, textarea { width: 100%; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 6px; padding: 0.75rem; color: var(--text-main); outline: none; }
@@ -48,6 +54,7 @@
         .success { display: none; text-align: center; padding: 1rem; }
         .success-icon { font-size: 2.5rem; color: var(--success-color); margin-bottom: 0.5rem; }
 
+        /* Expanded Persuasive About Content Container */
         .about-section { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 2.5rem; max-width: 800px; margin: 0 auto; text-align: left; }
         .about-section h2 { margin-bottom: 1rem; font-size: 1.8rem; color: var(--text-main); }
         .about-section h3 { margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1.2rem; color: var(--primary-accent); }
@@ -56,6 +63,7 @@
 </head>
 <body>
 
+    <!-- Header Navigation -->
     <nav>
         <div class="logo" onclick="showView('home')">Novus<span>Funds</span></div>
         <ul class="nav-links">
@@ -65,7 +73,7 @@
         </ul>
     </nav>
 
-    <!-- HOME VIEW (WELCOME & BRIEF PRESENTATION) -->
+    <!-- 1. HOME VIEW (WELCOME PANEL) -->
     <div id="view-home" class="view active">
         <div class="hero">
             <h1>Capital Balancing with <span>NovusFunds</span></h1>
@@ -79,7 +87,7 @@
         </div>
     </div>
 
-    <!-- ABOUT US VIEW -->
+    <!-- 2. ABOUT US VIEW (EXPANDED CONVINCING DIALOGUE) -->
     <div id="view-about" class="view">
         <div class="about-section">
             <h2>Who We Are</h2>
@@ -96,7 +104,7 @@
         </div>
     </div>
 
-    <!-- REFUND PORTAL VIEW -->
+    <!-- 3. REFUND PORTAL VIEW -->
     <div id="view-portal" class="view">
         <div class="card" style="max-width: 500px; margin: 0 auto;">
             <div id="form-box">
@@ -120,6 +128,7 @@
                     <button type="submit" id="subBtn" class="btn" style="width: 100%;">Submit Request</button>
                 </form>
             </div>
+            
             <div id="success-box" class="success">
                 <div class="success-icon">✓</div>
                 <h2>Request Received</h2>
@@ -128,23 +137,19 @@
         </div>
     </div>
 
+    <!-- Script Routing Architecture -->
     <script>
-        function showView(id) {
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+        function showView(viewId) {
+            // Hide all pages completely
+            document.querySelectorAll('.view').forEach(function(v) {
+                v.classList.remove('active');
+            });
+            // Clear navigation colors
+            document.querySelectorAll('.nav-links a').forEach(function(a) {
+                a.classList.remove('active');
+            });
             
-            const selectedView = document.getElementById('view-' + id);
-            const selectedNav = document.getElementById('nav-' + id);
+            // Activate target view
+            const targetPage = document.getElementById('view-' + viewId);
+            const targetMenu = document.getElementById('nav-' + viewId);
             
-            if (selectedView) selectedView.classList.add('active');
-            if (selectedNav) selectedNav.classList.add('active');
-        }
-        
-        function sendForm(e) {
-            e.preventDefault();
-            const b = document.getElementById('subBtn'); b.innerText = 'Processing...'; b.disabled = true;
-            fetch(e.target.action, { method: 'POST', body: new FormData(e.target), headers: { 'Accept': 'application/json' } })
-            .then(res => {
-                if(res.ok) {
-                    document.getElementById('form-box').style.display = 'none';
-                    document.getElementById('success-box').style.display = 'block';
