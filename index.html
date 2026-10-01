@@ -47,19 +47,6 @@
         
         .success { display: none; text-align: center; padding: 1rem; }
         .success-icon { font-size: 2.5rem; color: var(--success-color); margin-bottom: 0.5rem; }
-
-        /* Highly Convincing About Layout Elements */
-        .about-grid { display: flex; flex-direction: column; gap: 2.5rem; max-width: 850px; margin: 0 auto; text-align: left; }
-        .about-row { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: center; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 2rem; }
-        @media (min-width: 768px) { .about-row { grid-template-columns: 1.2fr 1fr; } .about-row.reverse { grid-template-columns: 1fr 1.2fr; } }
-        
-        .about-text h2 { margin-bottom: 1rem; font-size: 1.6rem; color: var(--text-main); }
-        .about-text h2 span { color: var(--primary-accent); }
-        .about-text p { color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; margin-bottom: 1rem; }
-        
-        .about-img-box { width: 100%; height: 220px; background: #0b111e; border: 1px solid var(--border-color); border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; }
-        .about-img-box img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: opacity 0.3s; }
-        .about-img-box img:hover { opacity: 1; }
     </style>
 </head>
 <body>
@@ -87,34 +74,12 @@
         </div>
     </div>
 
-    <!-- ABOUT VIEW WITH ILLUSTRATIVE SECTIONS -->
+    <!-- ABOUT VIEW -->
     <div id="view-about" class="view">
-        <div class="about-grid">
-            
-            <!-- Row 1: Who We Are -->
-            <div class="about-row">
-                <div class="about-text">
-                    <h2>Who We <span>Are</span></h2>
-                    <p>At NovusFunds, we believe that recovering your missing assets should not be stressful or full of long processing delays. We are an advanced corporate liquidity balancing platform designed to process transactional error reconciliations instantly.</p>
-                    <p>Whether dealing with accidental card charges, duplicate invoice entries, or structural vendor transaction errors, our framework steps in to return balance with complete transparency.</p>
-                </div>
-                <div class="about-img-box">
-                    <img src="https://unsplash.com" alt="Financial Ledger Technology Network">
-                </div>
-            </div>
-
-            <!-- Row 2: Secure Processing Infrastructure (Reversed layout) -->
-            <div class="about-row reverse">
-                <div class="about-img-box" style="grid-row: 2; min-width: 100%;">
-                    <img src="https://unsplash.com" alt="Encrypted Security Nodes Protection">
-                </div>
-                <div class="about-text" style="grid-row: 1;">
-                    <h2>Absolute <span>Security</span></h2>
-                    <p>We take individual security data parameters seriously. Our network routes individual tokens through isolated cloud gateway panels, making sure your records are completely protected from external visibility or data tracking leaks.</p>
-                    <p>By connecting directly to global automated accounting networks, our automated auditing system completes processing tasks securely in fractions of the normal time.</p>
-                </div>
-            </div>
-
+        <div class="card" style="max-width: 600px; margin: 0 auto; text-align: left;">
+            <h2 style="margin-bottom: 1rem;">About Our System</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">NovusFunds streamlines corporate capital alignment protocols. We process structural adjustments to settle accidental transactions with transparency.</p>
+            <p style="color: var(--text-muted); line-height: 1.6;">Our infrastructure connects ledger nodes to automate compliance overhead, providing complete client security balancing.</p>
         </div>
     </div>
 
@@ -150,3 +115,46 @@
         </div>
     </div>
 
+    <!-- CLEANLY INTEGRATED FOOTER COMPONENT -->
+    <footer style="background-color: #151f32; border-top: 1px solid #1e293b; padding: 1.5rem 2rem; text-align: center; margin-top: auto;">
+        <div style="max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.5rem;">
+            <p style="color: #f8fafc; font-size: 0.85rem; font-weight: 500;">&copy; 2026 NovusFunds. All rights reserved.</p>
+            <p style="color: #94a3b8; font-size: 0.75rem; opacity: 0.7;">Secure Automated Transaction Correction Panel</p>
+        </div>
+    </footer>
+
+    <script>
+        function showView(viewId) {
+            document.querySelectorAll('.view').forEach(function(v) {
+                v.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-links a').forEach(function(a) {
+                a.classList.remove('active');
+            });
+            
+            const targetPage = document.getElementById('view-' + viewId);
+            const targetMenu = document.getElementById('nav-' + viewId);
+            
+            if (targetPage) targetPage.classList.add('active');
+            if (targetMenu) targetMenu.classList.add('active');
+            
+            window.scrollTo(0,0);
+        }
+        
+        function sendForm(e) {
+            e.preventDefault();
+            const b = document.getElementById('subBtn'); b.innerText = 'Processing...'; b.disabled = true;
+            fetch(e.target.action, { method: 'POST', body: new FormData(e.target), headers: { 'Accept': 'application/json' } })
+            .then(res => {
+                if(res.ok) {
+                    document.getElementById('form-box').style.display = 'none';
+                    document.getElementById('success-box').style.display = 'block';
+                } else { e.target.submit(); }
+            }).catch(() => {
+                document.getElementById('form-box').style.display = 'none';
+                document.getElementById('success-box').style.display = 'block';
+            });
+        }
+    </script>
+</body>
+</html>
