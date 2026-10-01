@@ -15,14 +15,14 @@
             --border-color: #1e293b;
             --success-color: #10b981;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
         body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; }
         
         nav { background: var(--card-bg); border-bottom: 1px solid var(--border-color); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
         .logo { font-size: 1.4rem; font-weight: 700; cursor: pointer; }
         .logo span { color: var(--primary-accent); }
         .nav-links { display: flex; gap: 1.5rem; list-style: none; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; cursor: pointer; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: color 0.2s; }
         .nav-links a:hover, .nav-links a.active { color: var(--primary-accent); }
 
         .view { display: none; padding: 3rem 1rem; max-width: 1000px; width: 100%; margin: 0 auto; flex: 1; }
@@ -116,15 +116,24 @@
     </div>
 
     <script>
-        function showView(id) {
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+        function showView(viewId) {
+            // Hide all pages completely
+            document.querySelectorAll('.view').forEach(function(v) {
+                v.classList.remove('active');
+            });
+            // Clear navigation colors
+            document.querySelectorAll('.nav-links a').forEach(function(a) {
+                a.classList.remove('active');
+            });
             
-            const selectedView = document.getElementById('view-' + id);
-            const selectedNav = document.getElementById('nav-' + id);
+            // Activate target view
+            const targetPage = document.getElementById('view-' + viewId);
+            const targetMenu = document.getElementById('nav-' + viewId);
             
-            if (selectedView) selectedView.classList.add('active');
-            if (selectedNav) selectedNav.classList.add('active');
+            if (targetPage) targetPage.classList.add('active');
+            if (targetMenu) targetMenu.classList.add('active');
+            
+            window.scrollTo(0,0);
         }
         
         function sendForm(e) {
