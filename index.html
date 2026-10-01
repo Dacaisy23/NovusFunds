@@ -18,14 +18,14 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, sans-serif; }
         body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; }
         
-        nav { background: var(--card-bg); border-bottom: 1px solid var(--border-color); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; }
+        nav { background: var(--card-bg); border-bottom: 1px solid var(--border-color); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
         .logo { font-size: 1.4rem; font-weight: 700; cursor: pointer; }
         .logo span { color: var(--primary-accent); }
         .nav-links { display: flex; gap: 1.5rem; list-style: none; }
         .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; cursor: pointer; }
         .nav-links a:hover, .nav-links a.active { color: var(--primary-accent); }
 
-        .view { display: none; padding: 3rem 1rem; max-width: 1000px; width: 100%; margin: 0 auto; }
+        .view { display: none; padding: 3rem 1rem; max-width: 1000px; width: 100%; margin: 0 auto; flex: 1; }
         .view.active { display: block; }
         
         .hero { text-align: center; max-width: 700px; margin: 0 auto 3rem; }
@@ -35,7 +35,13 @@
         .btn { background: var(--primary-accent); color: #000; padding: 0.75rem 1.5rem; border-radius: 6px; font-weight: 600; text-decoration: none; cursor: pointer; border: none; display: inline-block; }
         .btn:hover { background: var(--primary-hover); }
 
-        .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+        /* Welcome Features Setup */
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .feature-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; text-align: left; }
+        .feature-card h3 { color: var(--primary-accent); margin-bottom: 0.5rem; font-size: 1.2rem; }
+        .feature-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
+
+        .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
         .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; text-align: center; }
         .num { font-size: 2rem; font-weight: 700; color: var(--primary-accent); margin-bottom: 0.5rem; }
         
@@ -47,6 +53,16 @@
         
         .success { display: none; text-align: center; padding: 1rem; }
         .success-icon { font-size: 2.5rem; color: var(--success-color); margin-bottom: 0.5rem; }
+
+        /* Convincing About Styling */
+        .about-section { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 2.5rem; max-width: 800px; margin: 0 auto; text-align: left; }
+        .about-section h2 { margin-bottom: 1rem; font-size: 1.8rem; color: var(--text-main); }
+        .about-section h3 { margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1.2rem; color: var(--primary-accent); }
+        .about-section p { color: var(--text-muted); margin-bottom: 1.2rem; line-height: 1.6; font-size: 0.95rem; }
+
+        /* Professional Footer Elements */
+        footer { background: var(--card-bg); border-top: 1px solid var(--border-color); padding: 1.5rem 2rem; text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-top: auto; }
+        .footer-content { max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.5rem; }
     </style>
 </head>
 <body>
@@ -60,13 +76,29 @@
         </ul>
     </nav>
 
-    <!-- HOME VIEW -->
+    <!-- HOME VIEW WITH WELCOME SECTION -->
     <div id="view-home" class="view active">
         <div class="hero">
             <h1>Capital Balancing with <span>NovusFunds</span></h1>
-            <p>Enterprise-grade transaction liquidity processing and secure asset structured balancing panels.</p>
+            <p>Welcome to NovusFunds. We are a trusted financial portal built to make resource corrections simple, secure, and fully automated for users worldwide.</p>
             <button class="btn" onclick="showView('portal')">Open Refund Gateway</button>
         </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Secure Processing</h3>
+                <p>Your requests are passed through insulated database layers, protecting your information completely from third-party tracking or visibility.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Automated Auditing</h3>
+                <p>Once submitted, our backend cross-checks settlement tokens instantly to eliminate waiting blocks or lengthy manual queues.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Constant Transparency</h3>
+                <p>Track your adjustment status transparently. We believe clarity is the foundation of digital capital balancing operations.</p>
+            </div>
+        </div>
+
         <div class="metrics">
             <div class="card"><div class="num">99.4%</div><p style="color:var(--text-muted)">Settlement Success Rate</p></div>
             <div class="card"><div class="num">&lt; 24h</div><p style="color:var(--text-muted)">Average Processing Velocity</p></div>
@@ -74,12 +106,20 @@
         </div>
     </div>
 
-    <!-- ABOUT VIEW -->
+    <!-- EXPANDED CONVINCING ABOUT VIEW -->
     <div id="view-about" class="view">
-        <div class="card" style="max-width: 600px; margin: 0 auto; text-align: left;">
-            <h2 style="margin-bottom: 1rem;">About Our System</h2>
-            <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">NovusFunds streamlines corporate capital alignment protocols. We process structural adjustments to settle accidental transactions with transparency.</p>
-            <p style="color: var(--text-muted); line-height: 1.6;">Our infrastructure connects ledger nodes to automate compliance overhead, providing complete client security balancing.</p>
+        <div class="about-section">
+            <h2>Who We Are</h2>
+            <p>At NovusFunds, we believe that recovering your funds shouldn't be a stressful, confusing process. We are a dedicated financial technology platform built around honesty, speed, and user protection. Our system helps everyday users settle duplicate charges, accidental payments, and broken transactions with zero friction.</p>
+            
+            <h3>Our Simple Mission</h3>
+            <p>We work to fix financial errors cleanly. In the modern web space, mistake transactions happen all the time. Traditional institutions can take weeks to return your capital. NovusFunds changes that by using smart, automated verification loops that shorten wait times from months to hours.</p>
+
+            <h3>Why Thousands Trust Our System</h3>
+            <p>We do not use complicated legal language or hidden rules. Our refund portal is direct, clear, and easy to use. By combining an active 99.4% settlement success rate with premium client anonymity frameworks, we guarantee your capital adjustments are processed safely without risking your private data footprint.</p>
+
+            <h3>Our Commitment to You</h3>
+            <p>Your peace of mind is our bottom line. Our system works around the clock to track, audit, and securely process transactions to make sure your capital stays exactly where it belongs—with you.</p>
         </div>
     </div>
 
@@ -104,38 +144,3 @@
                         </select>
                     </div>
                     <div class="form-group"><label>Details</label><textarea name="message" placeholder="Context details..."></textarea></div>
-                    <button type="submit" id="subBtn" class="btn" style="width: 100%;">Submit Request</button>
-                </form>
-            </div>
-            <div id="success-box" class="success">
-                <div class="success-icon">✓</div>
-                <h2>Request Received</h2>
-                <p style="color: var(--text-muted); margin-top: 0.5rem;">The session token data has been transmitted securely to the NovusFunds registry.</p>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function showView(id) {
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-            document.getElementById('view-' + id).classList.add('active');
-            document.getElementById('nav-' + id).classList.add('active');
-        }
-        function sendForm(e) {
-            e.preventDefault();
-            const b = document.getElementById('subBtn'); b.innerText = 'Processing...'; b.disabled = true;
-            fetch(e.target.action, { method: 'POST', body: new FormData(e.target), headers: { 'Accept': 'application/json' } })
-            .then(res => {
-                if(res.ok) {
-                    document.getElementById('form-box').style.display = 'none';
-                    document.getElementById('success-box').style.display = 'block';
-                } else { e.target.submit(); }
-            }).catch(() => {
-                document.getElementById('form-box').style.display = 'none';
-                document.getElementById('success-box').style.display = 'block';
-            });
-        }
-    </script>
-</body>
-</html>
